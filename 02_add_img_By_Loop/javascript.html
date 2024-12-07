@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dynamic Image Addition</title>
+  <style>
+    .image-container {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .image-container img {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+  <button id="addImage">Add Images</button>
+  <div class="image-container" id="imageContainer"></div>
+
+  <script>
+
+// Array of image URLs
+
+
+const addImageButton = document.getElementById('addImage');
+const imageContainer = document.getElementById('imageContainer');
+
+// Array of image URLs
+
+const images = [
+ '../img/1.jpg',
+ '../img/2.jpg',
+ '../img/3.jpg',
+ '../img/4.jpg',
+ '../img/4.jpg',
+ '../img/5.jpg',
+ '../img/6.jpg',
+ '../img/7.jpg',
+ '../img/8.jpg',
+
+];
+
+// Track the current index
+let currentIndex = 0;
+
+
+// Add  one image on each button click
+addImageButton.addEventListener('click', () => {
+  if (currentIndex < images.length) {
+    // Create an img element
+    const img = document.createElement('img');
+    img.src = images[currentIndex];
+    img.alt = `Image ${currentIndex + 1}`;
+
+    // Append the img element to the container
+    imageContainer.appendChild(img);
+
+    // Increment the index
+    currentIndex++;
+  } else {
+    // Disable the button if all images are added
+    addImageButton.disabled = true;
+    addImageButton.textContent = 'All Images Added';
+  }
+});
+//how to add one image on each button click
+
+
+  </script>
+</body>
+</html>

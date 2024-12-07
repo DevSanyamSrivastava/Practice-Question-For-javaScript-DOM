@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Captcha Generator</title>
+  <style>
+    #captcha-container {
+      text-align: center;
+      margin-top: 20px;
+    }
+    #captcha {
+      font-size: 24px;
+      font-weight: bold;
+      letter-spacing: 2px;
+      color: #333;
+    }
+    #result {
+      margin-top: 10px;
+      font-size: 18px;
+      color: green;
+    }
+    #error {
+      margin-top: 10px;
+      font-size: 18px;
+      color: red;
+    }
+  </style>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+
+  <div id="captcha-container">
+    <div id="captcha"></div>
+    <input type="text" id="captcha-input" placeholder="Enter Captcha" />
+    <button id="submit-btn">Submit</button>
+    <div id="result"></div>
+    <div id="error"></div>
+  </div>
+
+  <script>
+    // Prevent right-click, cut, copy, paste actions
+    $(document).on('contextmenu', function(e) {
+      e.preventDefault();
+    });
+
+    $(document).on('cut copy paste', function(e) {
+      e.preventDefault();
+    });
+
+    // Function to generate random captcha
+    function generateCaptcha() {
+      const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+      let captcha = '';
+      for (let i = 0; i < 6; i++) {
+        captcha += chars.charAt(Math.floor(Math.random() * chars.length));
+      }
+      $('#captcha').text(captcha);
+      return captcha;
+    }
+
+    let captchaCode = generateCaptcha();
+
+    // Check captcha input
+    $('#submit-btn').on('click', function() {
+      const userInput = $('#captcha-input').val();
+      const resultDiv = $('#result');
+      const errorDiv = $('#error');
+
+      if (userInput === captchaCode) {
+        resultDiv.text('Captcha Matched!');
+        errorDiv.text('');
+      } else {
+        errorDiv.text('Captcha Incorrect!');
+        resultDiv.text('');
+      }
+
+      // Regenerate captcha after every check
+      captchaCode = generateCaptcha();
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React in a Single HTML File</title>
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        body {
+            background-color: red;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        #maincontainer img {
+            height: 250px;
+            width: 150px;
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        const App = () => {
+            const [images, setImages] = React.useState([]);
+
+            const handleAddImage = () => {
+                setImages((prevImages) => [
+                   ...prevImages,
+                    { src: '../img/1.jpg' }
+                ]);
+            };
+
+            return (
+                <div>
+                    <button onClick={handleAddImage}>Add Image</button>
+                    <div id="maincontainer">
+                        {images.map((image, index) => (
+                            <img
+                                key={index}
+                                src={image.src}
+                                alt={`Image ${index + 1}`}
+                            />
+                        ))}
+                    </div>
+                </div>
+            );
+        };
+
+        ReactDOM.render(<App />, document.getElementById('root'));
+    </script>
+</body>
+</html>

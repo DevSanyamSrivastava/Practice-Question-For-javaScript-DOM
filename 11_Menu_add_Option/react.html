@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Display Selected Menu Option as Link</title>
+  <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const App = () => {
+      const [selectedOption, setSelectedOption] = React.useState('');
+      const [links, setLinks] = React.useState([]);
+
+      const handleSelectChange = (event) => {
+        setSelectedOption(event.target.value);
+      };
+
+      const addLink = () => {
+        if (selectedOption) {
+          setLinks([...links, selectedOption]);
+        } else {
+          alert('Please select an option from the dropdown.');
+        }
+      };
+
+      return (
+        <div style={{ textAlign: 'center' }}>
+          <select onChange={handleSelectChange} value={selectedOption}>
+            <option value="">Select an option</option>
+            <option value="Option 1">Option 1</option>
+            <option value="Option 2">Option 2</option>
+            <option value="Option 3">Option 3</option>
+            <option value="Option 4">Option 4</option>
+          </select>
+          <button onClick={addLink} style={{ padding: '10px 20px', fontSize: '16px', cursor: 'pointer' }}>Add Link</button>
+
+          <div className="links" style={{ marginTop: '20px' }}>
+            {links.map((link, index) => (
+              <div key={index} className="link-item" style={{ margin: '5px 0', fontSize: '18px' }}>
+                <a href="#" style={{ color: 'blue', textDecoration: 'none' }}>
+                   {link}
+                </a>
+              </div>
+            ))}
+          </div>
+        </div>
+      );
+    };
+
+    ReactDOM.render(<App />, document.getElementById('root'));
+  </script>
+</body>
+</html>

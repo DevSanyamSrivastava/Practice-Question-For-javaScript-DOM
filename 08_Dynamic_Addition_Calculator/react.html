@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dynamic Calculator</title>
+  <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const App = () => {
+      const [num1, setNum1] = React.useState('');
+      const [num2, setNum2] = React.useState('');
+      const [result, setResult] = React.useState('Result: ');
+
+      const handleCalculation = (operation) => {
+        const number1 = parseFloat(num1);
+        const number2 = parseFloat(num2);
+
+        if (isNaN(number1) || isNaN(number2)) {
+          setResult('Please enter valid numbers!');
+          return;
+        }
+
+        let calculatedResult;
+
+        switch (operation) {
+          case 'add':
+            calculatedResult = number1 + number2;
+            break;
+          case 'subtract':
+            calculatedResult = number1 - number2;
+            break;
+          case 'multiply':
+            calculatedResult = number1 * number2;
+            break;
+          case 'divide':
+            if (number2 === 0) {
+              setResult('Cannot divide by zero!');
+              return;
+            }
+            calculatedResult = number1 / number2;
+            break;
+          default:
+            calculatedResult = 'Invalid operation';
+        }
+
+        setResult(`Result: ${calculatedResult}`);
+      };
+
+      return (
+        <div className="container">
+          <input
+            type="number"
+            value={num1}
+            onChange={(e) => setNum1(e.target.value)}
+            placeholder="Enter number 1"
+          />
+          <input
+            type="number"
+            value={num2}
+            onChange={(e) => setNum2(e.target.value)}
+            placeholder="Enter number 2"
+          />
+
+          <button onClick={() => handleCalculation('add')}>Add</button>
+          <button onClick={() => handleCalculation('subtract')}>Subtract</button>
+          <button onClick={() => handleCalculation('multiply')}>Multiply</button>
+          <button onClick={() => handleCalculation('divide')}>Divide</button>
+
+          <div id="result" className="result">{result}</div>
+        </div>
+      );
+    };
+
+    ReactDOM.render(<App />, document.getElementById('root'));
+  </script>
+
+</body>
+</html>

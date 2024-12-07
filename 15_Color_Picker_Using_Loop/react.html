@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Random Color Picker</title>
+  <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <style>
+    #color-box {
+      width: 200px;
+      height: 200px;
+      margin-top: 20px;
+      text-align: center;
+      line-height: 200px;
+      font-size: 20px;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const App = () => {
+      const [color, setColor] = React.useState('#FFFFFF');
+
+      // Function to generate random hex color code
+      const generateRandomColor = () => {
+        const chars = '0123456789ABCDEF';
+        let color = '#';
+        
+        for (let i = 0; i < 6; i++) {
+          color += chars.charAt(Math.floor(Math.random() * chars.length));
+        }
+        
+        setColor(color);  // Update state with the new color
+      };
+
+      return (
+        <div style={{ textAlign: 'center' }}>
+          <button onClick={generateRandomColor}>Pick Random Color</button>
+          <div
+            id="color-box"
+            style={{ backgroundColor: color }}
+          >
+            {color}
+          </div>
+        </div>
+      );
+    };
+
+    ReactDOM.render(<App />, document.getElementById('root'));
+  </script>
+</body>
+</html>

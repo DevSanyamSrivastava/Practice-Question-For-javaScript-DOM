@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image Swap on Button Click</title>
+  <style>
+    .image-container {
+      display: flex;
+      justify-content: space-around;
+      margin: 20px 0;
+    }
+    img {
+      width: 200px;
+      height: 150px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="image-container">
+    <div id="img1">
+      <img src="../img/1.jpg" alt="Image 1">
+    </div>
+    <div id="img2">
+      <img src="../img/2.jpg" alt="Image 2">
+    </div>
+  </div>
+
+  <div>
+    <button onclick="swapImages()">Swap Images</button>
+  </div>
+
+  <script>
+    function swapImages() {
+      const img1 = document.getElementById('img1').querySelector('img');
+      const img2 = document.getElementById('img2').querySelector('img');
+      
+      // Swapping the sources of the images
+      const tempSrc = img1.src;
+      img1.src = img2.src;
+      img2.src = tempSrc;
+    }
+  </script>
+
+</body>
+</html>

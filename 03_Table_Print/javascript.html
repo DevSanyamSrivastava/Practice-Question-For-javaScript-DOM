@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Generate Multiplication Table</title>
+  <style>
+    table {
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 8px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <input type="number" id="numberInput" placeholder="Enter a number" />
+  <button id="generateTable">Generate Table</button>
+  <div id="tableContainer"></div>
+
+  <script>
+    document.getElementById('generateTable').addEventListener('click', function () {
+      const num = parseInt(document.getElementById('numberInput').value);
+      const tableContainer = document.getElementById('tableContainer');
+      tableContainer.innerHTML = ''; // Clear previous table
+
+      if (isNaN(num)) {
+        tableContainer.textContent = 'Please enter a valid number!';
+        return;
+      }
+
+      const table = document.createElement('table');
+      const thead = document.createElement('thead');
+      const tbody = document.createElement('tbody');
+
+      // Create table header
+      const headerRow = document.createElement('tr');
+      ['Number', 'Multiplier', 'Result'].forEach(header => {
+        const th = document.createElement('th');
+        th.textContent = header;
+        headerRow.appendChild(th);
+      });
+      thead.appendChild(headerRow);
+      table.appendChild(thead);
+
+      // Create table rows
+      for (let i = 1; i <= 10; i++) {
+        const row = document.createElement('tr');
+
+        const numberCell = document.createElement('td');
+        numberCell.textContent = num;
+
+        const multiplierCell = document.createElement('td');
+        multiplierCell.textContent = i;
+
+        const resultCell = document.createElement('td');
+        resultCell.textContent = num * i;
+
+        row.appendChild(numberCell);
+        row.appendChild(multiplierCell);
+        row.appendChild(resultCell);
+        tbody.appendChild(row);
+      }
+
+      table.appendChild(tbody);
+      tableContainer.appendChild(table);
+    });
+  </script>
+</body>
+</html>

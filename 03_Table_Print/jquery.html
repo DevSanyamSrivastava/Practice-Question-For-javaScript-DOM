@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Generate Multiplication Table</title>
+  <style>
+    table {
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 8px;
+      text-align: center;
+    }
+  </style>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+  <input type="number" id="numberInput" placeholder="Enter a number" />
+  <button id="generateTable">Generate Table</button>
+  <div id="tableContainer"></div>
+
+  <script>
+    $('#generateTable').on('click', function () {
+      const num = parseInt($('#numberInput').val());
+      const tableContainer = $('#tableContainer');
+      tableContainer.empty(); // Clear previous table
+
+      if (isNaN(num)) {
+        tableContainer.text('Please enter a valid number!');
+        return;
+      }
+
+      const table = $('<table></table>');
+      const thead = $('<thead></thead>');
+      const tbody = $('<tbody></tbody>');
+
+      // Create table header
+      const headerRow = $('<tr></tr>');
+      ['Number', 'Multiplier', 'Result'].forEach(header => {
+        headerRow.append(`<th>${header}</th>`);
+      });
+      thead.append(headerRow);
+      table.append(thead);
+
+      // Create table rows
+      for (let i = 1; i <= 10; i++) {
+        const row = $('<tr></tr>');
+        row.append(`<td>${num}</td>`);
+        row.append(`<td>${i}</td>`);
+        row.append(`<td>${num * i}</td>`);
+        tbody.append(row);
+      }
+
+      table.append(tbody);
+      tableContainer.append(table);
+    });
+  </script>
+</body>
+</html>

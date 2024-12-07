@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Form Validation - JavaScript</title>
+  <style>
+    .error {
+      color: red;
+      font-size: 0.9em;
+    }
+  </style>
+</head>
+<body>
+  <form id="myForm">
+    <label>
+      Name: <input type="text" id="name" />
+    </label>
+    <span id="nameError" class="error"></span><br><br>
+
+    <label>
+      Email: <input type="email" id="email" />
+    </label>
+    <span id="emailError" class="error"></span><br><br>
+
+    <label>
+      Password: <input type="password" id="password" />
+    </label>
+    <span id="passwordError" class="error"></span><br><br>
+
+    <button type="submit">Submit</button>
+  </form>
+
+  <script>
+    document.getElementById('myForm').addEventListener('submit', function (event) {
+      event.preventDefault();
+
+      // Clear previous errors
+      document.getElementById('nameError').textContent = '';
+      document.getElementById('emailError').textContent = '';
+      document.getElementById('passwordError').textContent = '';
+
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value.trim();
+
+      let isValid = true;
+
+      // Name validation
+      if (name === '') {
+        document.getElementById('nameError').textContent = 'Name is required.';
+        isValid = false;
+      }
+
+      // Email validation
+      if (email === '') {
+        document.getElementById('emailError').textContent = 'Email is required.';
+        isValid = false;
+      } else if (!/\S+@\S+\.\S+/.test(email)) {
+        document.getElementById('emailError').textContent = 'Enter a valid email address.';
+        isValid = false;
+      }
+
+      // Password validation
+      if (password === '') {
+        document.getElementById('passwordError').textContent = 'Password is required.';
+        isValid = false;
+      } else if (password.length < 6) {
+        document.getElementById('passwordError').textContent = 'Password must be at least 6 characters.';
+        isValid = false;
+      }
+
+      // If valid, show success alert
+      if (isValid) {
+        alert('Form submitted successfully!');
+      }
+    });
+  </script>
+</body>
+</html>

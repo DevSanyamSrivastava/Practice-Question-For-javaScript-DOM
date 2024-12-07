@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image Swap on Button Click</title>
+  <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const App = () => {
+      const [img1Src, setImg1Src] = React.useState('../img/1.jpg');
+      const [img2Src, setImg2Src] = React.useState('../img/6.jpg');
+
+      const swapImages = () => {
+        setImg1Src(img2Src);
+        setImg2Src(img1Src);
+      };
+
+      return (
+        <div style={{ textAlign: 'center' }}>
+          <div className="image-container" style={{ display: 'flex', justifyContent: 'space-around', margin: '20px 0' }}>
+            <div id="img1">
+              <img src={img1Src} alt="Image 1" style={{ width: '200px', height: '150px', border: '1px solid #ccc', borderRadius: '5px' }} />
+            </div>
+            <div id="img2">
+              <img src={img2Src} alt="Image 2" style={{ width: '200px', height: '150px', border: '1px solid #ccc', borderRadius: '5px' }} />
+            </div>
+          </div>
+          <button onClick={swapImages} style={{ padding: '10px 20px', fontSize: '16px', cursor: 'pointer' }}>Swap Images</button>
+        </div>
+      );
+    };
+
+    ReactDOM.render(<App />, document.getElementById('root'));

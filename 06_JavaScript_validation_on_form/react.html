@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Form Validation - React</title>
+  <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const App = () => {
+      const [formData, setFormData] = React.useState({
+        name: '',
+        email: '',
+        password: ''
+      });
+      const [errors, setErrors] = React.useState({});
+
+      const validateForm = () => {
+        const newErrors = {};
+
+        if (!formData.name) newErrors.name = 'Name is required.';
+        if (!formData.email) {
+          newErrors.email = 'Email is required.';
+        } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+          newErrors.email = 'Enter a valid email address.';
+        }
+        if (!formData.password) {
+          newErrors.password = 'Password is required.';
+        } else if (formData.password.length < 6) {
+          newErrors.password = 'Password must be at least 6 characters.';
+        }
+
+        setErrors(newErrors);
+        return Object.keys(newErrors).length === 0;
+      };
+
+      const handleSubmit = (event) => {
+        event.preventDefault();
+        if (validateForm()) {
+          alert('Form submitted successfully!');
+        }
+      };
+
+      const handleChange = (e) => {
+        setFormData({ ...formData, [e.target.name]: e.target.value });
+      };
+
+      return (
+        <form onSubmit={handleSubmit}>
+          <label>
+            Name:
+            <input
+              type="text"
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+            />
+          </label>
+          {errors.name && <span className="error">{errors.name}</span>}
+          <br /><br />
+
+          <label>
+            Email:
+            <input
+              type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+            />
+          </label>
+          {errors.email && <span className="error">{errors.email}</span>}
+          <br /><br />
+
+          <label>
+            Password:
+            <input
+              type="password"
+              name="password"
+              value={formData.password}
+              onChange={handleChange}
+            />
+          </label>
+          {errors.password && <span className="error">{errors.password}</span>}
+          <br /><br />
+
+          <button type="submit">Submit</button>
+        </form>
+      );
+    };
+
+    ReactDOM.render(<App />, document.getElementById('root'));
+  </script>
+</body>
+</html>

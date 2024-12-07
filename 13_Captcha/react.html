@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Captcha Generator</title>
+  <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const App = () => {
+      const [captcha, setCaptcha] = React.useState(generateCaptcha());
+      const [userInput, setUserInput] = React.useState('');
+      const [result, setResult] = React.useState('');
+      const [error, setError] = React.useState('');
+
+      // Prevent right-click, cut, copy, paste actions
+      React.useEffect(() => {
+        const handleRightClick = (e) => e.preventDefault();
+        const handleCutCopyPaste = (e) => e.preventDefault();
+        document.addEventListener('contextmenu', handleRightClick);
+        document.addEventListener('cut', handleCutCopyPaste);
+        document.addEventListener('copy', handleCutCopyPaste);
+        document.addEventListener('paste', handleCutCopyPaste);
+        return () => {
+          document.removeEventListener('contextmenu', handleRightClick);
+          document.removeEventListener('cut', handleCutCopyPaste);
+          document.removeEventListener('copy', handleCutCopyPaste);
+          document.removeEventListener('paste', handleCutCopyPaste);
+        };
+      }, []);
+
+      // Function to generate random captcha
+      function generateCaptcha() {
+        const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        let captcha = '';
+        for (let i = 0; i < 6; i++) {
+          captcha += chars.charAt(Math.floor(Math.random() * chars.length));
+        }
+        return captcha;
+      }
+
+      const handleSubmit = () => {
+        if (userInput === captcha) {
+          setResult('Captcha Matched!');
+          setError('');
+        } else {
+          setError('Captcha Incorrect!');
+          setResult('');
+        }
+        setCaptcha(generateCaptcha());
+      };
+
+      return (
+        <div style={{ textAlign: 'center', marginTop: '20px' }}>
+          <div style={{ fontSize: '24px', fontWeight: 'bold', letterSpacing: '2px' }}>
+            {captcha}
+          </div>
+          <input
+            type="text"
+            value={userInput}
+            onChange={(e) => setUserInput(e.target.value)}
+            placeholder="Enter Captcha"
+          />
+          <button onClick={handleSubmit}>Submit</button>
+          {result && <div style={{ color: 'green', marginTop: '10px' }}>{result}</div>}
+          {error && <div style={{ color: 'red', marginTop: '10px' }}>{error}</div>}
+        </div>
+      );
+    };
+
+    ReactDOM.render(<App />, document.getElementById('root'));
+  </script>
+</body>
+</html>

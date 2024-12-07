@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prompt and Display User Input</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+
+  <input type="text" id="user-input" placeholder="Enter a string">
+  <button id="submit-btn">Submit</button>
+  <p id="output"></p>
+
+  <script>
+    // jQuery version to show user input
+    $('#submit-btn').click(function() {
+      const userInput = $('#user-input').val();
+
+      // Display the input in an alert
+      alert("You entered: " + userInput);
+
+      // Display the input on the page
+      $('#output').text("You entered: " + userInput);
+    });
+  </script>
+
+</body>
+</html>

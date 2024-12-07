@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Display Selected Menu Option as Link</title>
+  <style>
+    .links {
+      margin-top: 20px;
+    }
+    .link-item {
+      margin: 5px 0;
+      font-size: 18px;
+    }
+    .link-item a {
+      color: blue;
+      text-decoration: none;
+    }
+  </style>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+
+  <select id="menuSelect">
+    <option value="">Select an option</option>
+    <option value="Option 1">Option 1</option>
+    <option value="Option 2">Option 2</option>
+    <option value="Option 3">Option 3</option>
+    <option value="Option 4">Option 4</option>
+  </select>
+  <button id="addLinkBtn">Add Link</button>
+
+  <div class="links" id="linksContainer"></div>
+
+  <script>
+    $('#addLinkBtn').on('click', function() {
+      const selectedOption = $('#menuSelect').val();
+      const linksContainer = $('#linksContainer');
+
+      if (selectedOption) {
+        const newLinkDiv = $('<div class="link-item"></div>');
+        const newLink = $('<a href="#"></a>').text(`Next: ${selectedOption}`);
+        newLinkDiv.append(newLink);
+        linksContainer.append(newLinkDiv);
+      } else {
+        alert('Please select an option from the dropdown.');
+      }
+    });
+  </script>
+
+</body>
+</html>

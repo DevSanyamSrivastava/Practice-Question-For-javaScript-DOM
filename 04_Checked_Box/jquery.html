@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkbox Show/Hide Button</title>
+  <style>
+    #submitButton {
+      display: none;
+      margin-top: 10px;
+    }
+  </style>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+  <label>
+    <input type="checkbox" id="toggleCheckbox" />
+    Click to show Submit button
+  </label>
+  <button id="submitButton">Submit</button>
+
+  <script>
+    $('#toggleCheckbox').on('change', function () {
+      if ($(this).is(':checked')) {
+        $('#submitButton').show();
+      } else {
+        $('#submitButton').hide();
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prompt and Display User Input</title>
+</head>
+<body>
+
+  <input type="text" id="user-input" placeholder="Enter a string">
+  <button onclick="showInput()">Submit</button>
+  <p id="output"></p>
+
+  <script>
+    // Function to show user input
+    function showInput() {
+      const userInput = document.getElementById('user-input').value;
+
+      // Display the input in an alert
+      alert("You entered: " + userInput);
+
+      // Display the input on the page
+      document.getElementById('output').innerText = "You entered: " + userInput;
+    }
+  </script>
+
+</body>
+</html>

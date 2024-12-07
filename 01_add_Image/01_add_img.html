@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body id="body">
+    <button id="addimg">addimg</button>
+    <div id="maincontainer"></div>
+    <script>
+        const addimg = document.getElementById("addimg")
+        const body = document.getElementById("body")
+
+        const store = document.getElementById("maincontainer")
+        addimg.addEventListener('click', function(){
+            const img = document.createElement('img')
+            img.src = 'img/1.jpg';
+            img.style.height = "250px"
+            img.style.width = "150px"
+            img.style.padding = "5px"
+         
+            store.appendChild(img)
+        })
+        addimg.addEventListener('onload', function(){
+            const body = document.createElement('body')
+             body.style.backgroundColor = "red"
+             store.appendChild(boy)
+        })
+    </script>
+</body>
+</html>

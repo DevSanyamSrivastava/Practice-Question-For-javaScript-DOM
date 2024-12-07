@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Toggle Image Visibility</title>
+  <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <style>
+    #image-container img {
+      width: 200px;
+      height: 200px;
+      transition: opacity 0.3s ease;
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const App = () => {
+      const [isVisible, setIsVisible] = React.useState(true);
+
+      // Toggle image visibility
+      const toggleImage = () => {
+        setIsVisible(!isVisible);
+      };
+
+      return (
+        <div style={{ textAlign: 'center' }}>
+          <button onClick={toggleImage}>Toggle Image</button>
+          <div id="image-container">
+            {isVisible && <img src="../img/7.jpg" alt="Sample Image" />}
+          </div>
+        </div>
+      );
+    };
+
+    ReactDOM.render(<App />, document.getElementById('root'));
+  </script>
+</body>
+</html>

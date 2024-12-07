@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Toggle Image Visibility</title>
+  <style>
+    #image-container img {
+      width: 200px;
+      height: 200px;
+      transition: opacity 0.3s ease;
+    }
+  </style>
+</head>
+<body>
+
+  <button onclick="toggleImage()">Toggle Image</button>
+  <div id="image-container">
+    <img src="../img/8.jpg" alt="Sample Image" id="image">
+  </div>
+
+  <script>
+    // JavaScript to toggle image visibility
+    function toggleImage() {
+      const image = document.getElementById('image');
+      if (image.style.display === 'none') {
+        image.style.display = 'block';
+      } else {
+        image.style.display = 'none';
+      }
+    }
+  </script>
+
+</body>
+</html>

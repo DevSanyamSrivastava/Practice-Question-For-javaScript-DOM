@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body id="body">
+    <button id="addimg">Add Image</button>
+    <div id="maincontainer"></div>
+    <script>
+        $(document).ready(function () {
+            // Add image on button click
+            $("#addimg").on("click", function () {
+                const img = $("<img>", {
+                    src: "../img/1.jpg",
+                    css: {
+                        height: "250px",
+                        width: "150px",
+                        padding: "5px"
+                    }
+                });
+                $("#maincontainer").append(img);
+            });
+
+            // Set background color on page load
+            $("body").css("background-color", "#212121");
+        });
+    </script>
+</body>
+</html>

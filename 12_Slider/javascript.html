@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image Slider</title>
+  <style>
+    #slider {
+      width: 100%;
+      height: 60vh;
+      overflow: hidden;
+      position: relative;
+    }
+    #slider img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      position: absolute;
+      transition: opacity 1s ease-in-out;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="slider"></div>
+
+  <script>
+    const images = [
+      '../img/1.jpg',
+      '../img/2.jpg',
+      '../img/3.jpg',
+      '../img/4.jpg',
+      '../img/5.jpg'
+    ];
+
+    let currentIndex = 0;
+    const slider = document.getElementById('slider');
+
+    // Create image elements
+    images.forEach((imageSrc, index) => {
+      const img = document.createElement('img');
+      img.src = imageSrc;
+      img.style.opacity = 0; // Initially set opacity to 0 (hidden)
+      slider.appendChild(img);
+    });
+
+    const allImages = slider.getElementsByTagName('img');
+
+    function showNextImage() {
+      // Set current image to visible (opacity 1)
+      allImages[currentIndex].style.opacity = 1;
+
+      // Hide previous image (opacity 0)
+      const prevIndex = (currentIndex - 1 + images.length) % images.length;
+      allImages[prevIndex].style.opacity = 0;
+
+      // Move to next index
+      currentIndex = (currentIndex + 1) % images.length;
+    }
+
+    // Auto change image every 3 seconds
+    setInterval(showNextImage, 3000);
+
+    // Initially show the first image
+    showNextImage();
+  </script>
+
+</body>
+</html>

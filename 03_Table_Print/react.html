@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Generate Multiplication Table</title>
+  <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <style>
+    table {
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 8px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const App = () => {
+      const [number, setNumber] = React.useState('');
+      const [table, setTable] = React.useState([]);
+
+      const generateTable = () => {
+        if (isNaN(parseInt(number))) {
+          alert('Please enter a valid number');
+          return;
+        }
+
+        const newTable = [];
+        for (let i = 1; i <= 10; i++) {
+          newTable.push({ multiplier: i, result: number * i });
+        }
+        setTable(newTable);
+      };
+
+      return (
+        <div>
+          <input
+            type="number"
+            value={number}
+            onChange={(e) => setNumber(e.target.value)}
+            placeholder="Enter a number"
+          />
+          <button onClick={generateTable}>Generate Table</button>
+          {table.length > 0 && (
+            <table>
+              <thead>
+                <tr>
+                  <th>Number</th>
+                  <th>Multiplier</th>
+                  <th>Result</th>
+                </tr>
+              </thead>
+              <tbody>
+                {table.map((row, index) => (
+                  <tr key={index}>
+                    <td>{number}</td>
+                    <td>{row.multiplier}</td>
+                    <td>{row.result}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          )}
+        </div>
+      );
+    };
+
+    ReactDOM.render(<App />, document.getElementById('root'));
+  </script>
+</body>
+</html>

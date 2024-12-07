@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Captcha Generator</title>
+  <style>
+    #captcha-container {
+      text-align: center;
+      margin-top: 20px;
+    }
+    #captcha {
+      font-size: 24px;
+      font-weight: bold;
+      letter-spacing: 2px;
+      color: #333;
+    }
+    #result {
+      margin-top: 10px;
+      font-size: 18px;
+      color: green;
+    }
+    #error {
+      margin-top: 10px;
+      font-size: 18px;
+      color: red;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="captcha-container">
+    <div id="captcha"></div>
+    <input type="text" id="captcha-input" placeholder="Enter Captcha" />
+    <button onclick="checkCaptcha()">Submit</button>
+    <div id="result"></div>
+    <div id="error"></div>
+  </div>
+
+  <script>
+    // Prevent right-click, cut, copy, paste actions
+    document.addEventListener('contextmenu', function(e) {
+      e.preventDefault();
+    });
+
+    document.addEventListener('cut', function(e) {
+      e.preventDefault();
+    });
+
+    document.addEventListener('copy', function(e) {
+      e.preventDefault();
+    });
+
+    document.addEventListener('paste', function(e) {
+      e.preventDefault();
+    });
+
+    // Function to generate random captcha
+    function generateCaptcha() {
+      const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+      let captcha = '';
+      for (let i = 0; i < 6; i++) {
+        captcha += chars.charAt(Math.floor(Math.random() * chars.length));
+      }
+      document.getElementById('captcha').innerText = captcha;
+      return captcha;
+    }
+
+    // Store the generated captcha
+    let captchaCode = generateCaptcha();
+
+    // Check captcha input
+    function checkCaptcha() {
+      const userInput = document.getElementById('captcha-input').value;
+      const resultDiv = document.getElementById('result');
+      const errorDiv = document.getElementById('error');
+
+      if (userInput === captchaCode) {
+        resultDiv.innerText = 'Captcha Matched!';
+        errorDiv.innerText = '';
+      } else {
+        errorDiv.innerText = 'Captcha Incorrect!';
+        resultDiv.innerText = '';
+      }
+
+      // Regenerate captcha after every check
+      captchaCode = generateCaptcha();
+    }
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image Slider</title>
+  <style>
+    #slider {
+      width: 100%;
+      height: 60vh;
+      overflow: hidden;
+      position: relative;
+    }
+    #slider img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      position: absolute;
+      transition: opacity 1s ease-in-out;
+    }
+  </style>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+
+  <div id="slider"></div>
+
+  <script>
+    const images = [
+      '../img/1.jpg',
+      '../img/2.jpg',
+      '../img/3.jpg',
+      '../img/4.jpg',
+      '../img/5.jpg'
+    ];
+
+    let currentIndex = 0;
+    const slider = $('#slider');
+
+    // Create image elements and add to the slider
+    images.forEach((imageSrc) => {
+      const img = $('<img>').attr('src', imageSrc).css('opacity', 0);
+      slider.append(img);
+    });
+
+    const allImages = $('#slider img');
+
+    function showNextImage() {
+      // Set current image to visible (opacity 1)
+      $(allImages[currentIndex]).css('opacity', 1);
+
+      // Hide previous image (opacity 0)
+      const prevIndex = (currentIndex - 1 + images.length) % images.length;
+      $(allImages[prevIndex]).css('opacity', 0);
+
+      // Move to next index
+      currentIndex = (currentIndex + 1) % images.length;
+    }
+
+    // Auto change image every 3 seconds
+    setInterval(showNextImage, 3000);
+
+    // Initially show the first image
+    showNextImage();
+  </script>
+
+</body>
+</html>

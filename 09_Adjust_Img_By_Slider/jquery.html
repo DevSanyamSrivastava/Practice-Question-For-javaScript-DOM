@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Adjust Image Size Dynamically</title>
+  <style>
+    #imageContainer {
+      width: 100%;
+      text-align: center;
+    }
+    #image {
+      width: 300px;
+      height: auto;
+      transition: width 0.2s ease;
+    }
+  </style>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <input type="range" id="sizeRange" min="100" max="500" value="300">
+    <label for="sizeRange">Adjust Image Size</label>
+  <div id="imageContainer">
+    <img id="image" src="../img/1.jpg" alt="Sample Image">
+  </div>
+
+
+  <script>
+    $('#sizeRange').on('input', function() {
+      const newWidth = $(this).val();
+      $('#image').css('width', `${newWidth}px`);
+    });
+  </script>
+</body>
+</html>

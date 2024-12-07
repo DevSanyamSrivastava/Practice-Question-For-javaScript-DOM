@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dynamic Image Addition with React</title>
+  <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <style>
+    .image-container {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .image-container img {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const App = () => {
+      const images = [
+        '../img/1.jpg', '../img/2.jpg', '../img/3.jpg',
+        '../img/4.jpg', '../img/5.jpg', '../img/6.jpg',
+        '../img/7.jpg', '../img/8.jpg'
+      ];
+
+      const [currentIndex, setCurrentIndex] = React.useState(0);
+      const [addedImages, setAddedImages] = React.useState([]);
+
+      const handleAddImage = () => {
+        if (currentIndex < images.length) {
+          setAddedImages([...addedImages, images[currentIndex]]);
+          setCurrentIndex(currentIndex + 1);
+        }
+      };
+
+      return (
+        <div>
+          <button
+            onClick={handleAddImage}
+            disabled={currentIndex >= images.length}
+          >
+            {currentIndex < images.length ? "Add Images" : "All Images Added"}
+          </button>
+          <div className="image-container">
+            {addedImages.map((image, index) => (
+              <img key={index} src={image} alt={`Image ${index + 1}`} />
+            ))}
+          </div>
+        </div>
+      );
+    };
+
+    ReactDOM.render(<App />, document.getElementById('root'));
+  </script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Generate Short Name</title>
+  <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const App = () => {
+      const [fullName, setFullName] = React.useState('');
+      const [shortName, setShortName] = React.useState('');
+
+      const generateShortName = () => {
+        if (fullName.trim() === '') {
+          setShortName('Please enter a valid full name.');
+          return;
+        }
+
+        const names = fullName.trim().split(' ');
+        const initials = names.map(name => name.charAt(0).toUpperCase()).join('');
+        setShortName(`Short Name: ${initials}`);
+      };
+
+      return (
+        <div>
+          <label>
+            Full Name:
+            <input
+              type="text"
+              value={fullName}
+              onChange={(e) => setFullName(e.target.value)}
+              placeholder="Enter full name"
+            />
+          </label>
+          <button onClick={generateShortName}>Generate Short Name</button>
+          <p>{shortName}</p>
+        </div>
+      );
+    };
+
+    ReactDOM.render(<App />, document.getElementById('root'));
+  </script>
+</body>
+</html>

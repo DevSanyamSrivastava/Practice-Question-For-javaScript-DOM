@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Random Color Picker</title>
+  <style>
+    #color-box {
+      width: 200px;
+      height: 200px;
+      margin-top: 20px;
+      text-align: center;
+      line-height: 200px;
+      font-size: 20px;
+      color: white;
+    }
+  </style>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+
+  <button id="color-btn">Pick Random Color</button>
+  <div id="color-box">#FFFFFF</div>
+
+  <script>
+    // jQuery version to generate random hex color code
+    $('#color-btn').on('click', function() {
+      const chars = '0123456789ABCDEF';
+      let color = '#';
+      
+      for (let i = 0; i < 6; i++) {
+        color += chars.charAt(Math.floor(Math.random() * chars.length));
+      }
+      
+      // Update color box with the new color
+      $('#color-box').css('background-color', color).text(color);
+    });
+  </script>
+
+</body>
+</html>

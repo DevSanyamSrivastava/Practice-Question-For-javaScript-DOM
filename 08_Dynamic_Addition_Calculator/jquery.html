@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dynamic Calculator</title>
+  <style>
+    .container {
+      width: 300px;
+      padding: 20px;
+      border: 1px solid #ccc;
+      margin: 0 auto;
+      border-radius: 5px;
+    }
+    input, button {
+      margin: 10px 0;
+      padding: 8px;
+      width: 100%;
+      font-size: 16px;
+    }
+    .result {
+      margin-top: 20px;
+      padding: 10px;
+      font-size: 18px;
+      background-color: #f4f4f4;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+  </style>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+
+  <div class="container">
+    <input type="number" id="input1" placeholder="Enter number 1">
+    <input type="number" id="input2" placeholder="Enter number 2">
+
+    <button id="addButton">Add</button>
+    <button id="subtractButton">Subtract</button>
+    <button id="multiplyButton">Multiply</button>
+    <button id="divideButton">Divide</button>
+
+    <div id="result" class="result">Result: </div>
+  </div>
+
+  <script>
+    function displayResult(result) {
+      $('#result').text(`Result: ${result}`);
+    }
+
+    function calculate(operation) {
+      const num1 = parseFloat($('#input1').val());
+      const num2 = parseFloat($('#input2').val());
+
+      if (isNaN(num1) || isNaN(num2)) {
+        $('#result').text('Please enter valid numbers!');
+        return;
+      }
+
+      let result;
+
+      switch (operation) {
+        case 'add':
+          result = num1 + num2;
+          break;
+        case 'subtract':
+          result = num1 - num2;
+          break;
+        case 'multiply':
+          result = num1 * num2;
+          break;
+        case 'divide':
+          if (num2 === 0) {
+            $('#result').text('Cannot divide by zero!');
+            return;
+          }
+          result = num1 / num2;
+          break;
+      }
+
+      displayResult(result);
+    }
+
+    $('#addButton').on('click', function() { calculate('add'); });
+    $('#subtractButton').on('click', function() { calculate('subtract'); });
+    $('#multiplyButton').on('click', function() { calculate('multiply'); });
+    $('#divideButton').on('click', function() { calculate('divide'); });
+  </script>
+
+</body>
+</html>
